@@ -18,9 +18,10 @@ from django.urls import path
 from  hospital_rest_app import views as app_views
 from django.urls import include
 from django.conf.urls import url
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('rest_api', include('hospital_rest_app.urls')),
-    path('', app_views.default),
+    #url('', admin.site.urls),
+    
+
 ]
