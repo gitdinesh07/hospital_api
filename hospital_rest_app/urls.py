@@ -21,7 +21,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    #url('', admin.site.urls),
-    
+    url(r'^city_name=(?P<city_name>[a-z]+)$', views.HospitalList.as_view()),
 
 ]
