@@ -3,7 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
+from django.http import HttpResponse
 from . import get_data
+import gc
 
 
 def default(request):
@@ -12,19 +14,18 @@ def default(request):
 
 class HospitalList(APIView):
 
-    def get(self, request, city_name):
-        obj = get_data.WebScrap()
-        mydata = obj.exp_data_mongo(city_name)
-        if mydata == 0:
-            get_d = obj.scrap_method(city_name)
-            if get_d == 0:
-                return Response(None);
+    def get(self, request,city_name):
+            obj = get_data.WebScrap(city_name)
+            mydata = obj.exp_data_mongo()
+            if mydata == 0:
+                return Response()
             else:
-                obj.imp_data_mongo()
-                mydata = obj.exp_data_mongo(city_name)
-                d = json.loads(mydata)
-                return Response(d)
-        else:
-            d = json.loads(mydata)
-            return Response(d)
+                return Response(json.loads(mydata))
 
+
+def post_city(self,city_name):
+    obj = get_data.WebScrap(city_name).scrap_method()
+    if obj == 1:
+        return HttpResponse("<h4> sucess .. </h4>")
+    else:
+       return HttpResponse("<h4>"+str(obj)+ "</h4>")

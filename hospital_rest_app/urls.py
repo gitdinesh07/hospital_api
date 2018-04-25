@@ -18,9 +18,9 @@ from django.urls import path
 from  hospital_rest_app import views as app_views
 from django.urls import include
 from django.conf.urls import url
-from . import views
+from . import views,get_data
 
 urlpatterns = [
-    url(r'^city_name=(?P<city_name>[a-z]+)$', views.HospitalList.as_view()),
-
+    url(r'^get/city_name=(?P<city_name>[a-zA-Z]+)$', views.HospitalList.as_view()),
+    url(r'^post/city_name=(?P<city_name>[a-zA-Z]+)$', views.post_city),
 ]
